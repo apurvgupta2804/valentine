@@ -74,7 +74,7 @@ export const questions = [
     id: 7,
     type: 'image-choice',
     question: 'Where is this picture taken?',
-    image: './assets/images/couple.jpg',
+    image: './assets/couple.jpg',
     options: [
       { text: 'Banaras', points: 3, emoji: '🕉️' },
       { text: 'Dwarka', points: 3, emoji: '🏛️' },
