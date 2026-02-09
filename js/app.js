@@ -255,7 +255,7 @@ class ValentineQuizApp {
     this.appContainer.innerHTML = `
       <div class="screen welcome-screen">
         <h1>Valentine Quiz 💕</h1>
-        <p class="welcome-name">Hello, Nidhi!</p>
+        <p class="welcome-name">Hello, Robin!</p>
         <p class="text-center">A romantic journey just for you</p>
         <button id="start-btn" class="pulse">Start Quiz</button>
       </div>
