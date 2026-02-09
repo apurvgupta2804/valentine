@@ -415,29 +415,16 @@ class ValentineQuizApp {
       return;
     }
 
-    // Get the question and selected option for bonus scoring
-    const question = questions[this.currentQuestion];
-    const selectedOption = question.options[answer.optionIndex];
-    
-    // Calculate points with bonus for correct answers
-    let finalPoints = answer.points;
-    if (selectedOption && selectedOption.correct) {
-      // Award bonus points for correct answer (50% bonus)
-      const bonusPoints = Math.floor(answer.points * 0.5);
-      finalPoints += bonusPoints;
-    }
-
     // Store answer with timestamp
     const answerRecord = {
       questionId: answer.questionId || questions[this.currentQuestion].id,
       selectedOption: answer.optionIndex,
-      points: finalPoints,
-      timestamp: Date.now(),
-      isCorrect: selectedOption?.correct || false
+      points: answer.points,
+      timestamp: Date.now()
     };
 
     this.answers.push(answerRecord);
-    this.score += finalPoints;
+    this.score += answer.points;
 
     // Navigate to next question or results
     if (this.currentQuestion < this.totalQuestions - 1) {
@@ -453,20 +440,10 @@ class ValentineQuizApp {
   showResults() {
     const totalScore = calculateTotalScore(this.answers);
     const message = getScoreMessage(totalScore, scoreMessages);
-    
-    // Calculate maximum possible score
-    const maxScore = 10 + 10 + 10 + 10 + 20 + 22.5 + 10; // Sum of all max points including bonuses
-    const isPerfectScore = totalScore >= maxScore * 0.95; // 95% or higher is considered perfect
-    
-    // Special message for perfect score
-    const matchDisplay = isPerfectScore 
-      ? '<div class="match-display">100% Match! 💯</div>' 
-      : '';
 
     this.appContainer.innerHTML = `
       <div class="screen results-screen">
         <h1>Your Score</h1>
-        ${matchDisplay}
         <div class="score-display">${totalScore}</div>
         <p class="score-message">${message}</p>
         <div class="results-hearts">❤️ 💕 💖 💝 ❤️</div>
